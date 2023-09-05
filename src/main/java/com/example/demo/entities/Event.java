@@ -70,9 +70,11 @@ public class Event implements Serializable{
     
     @PrePersist
     protected void onCreate() {
-        if (updatedDate == null) {
-            updatedDate = new Date();
+        if (createdDate == null) {
+            createdDate = new Date();
         }
+        
+        updatedDate = createdDate;
     }
     
 }
