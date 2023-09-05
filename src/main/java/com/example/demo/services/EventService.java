@@ -1,28 +1,29 @@
-package com.example.demo;
+package com.example.demo.services;
 
 import com.example.demo.entities.Event;
+import com.example.demo.repositories.EventRepository;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import services.EventService;
 
 
 @RestController
 @RequestMapping("/api/events")
-public class EventController {
-    
-    private final EventService eventService;
+public class EventService {
     
     @Autowired
-    public EventController(EventService _eventService) {
-        this.eventService = _eventService;
-    }
+    private final EventRepository eventRepository;
+    
+    
+    public EventService(EventRepository _eventRepository) {
+        this.eventRepository = _eventRepository;
+    }   
 
-    @GetMapping
+    @GetMapping("/all")
     public List<Event> getAllEvents() {
-        return eventService.getAllEvents();
+        return eventRepository.findAll();
     }
 
 }
